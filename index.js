@@ -36,12 +36,12 @@ Example 1:
 
 Input: num = 14
 Output: 6
-Explanation: 
-Step 1) 14 is even; divide by 2 and obtain 7. 
+Explanation:
+Step 1) 14 is even; divide by 2 and obtain 7.
 Step 2) 7 is odd; subtract 1 and obtain 6.
-Step 3) 6 is even; divide by 2 and obtain 3. 
-Step 4) 3 is odd; subtract 1 and obtain 2. 
-Step 5) 2 is even; divide by 2 and obtain 1. 
+Step 3) 6 is even; divide by 2 and obtain 3.
+Step 4) 3 is odd; subtract 1 and obtain 2.
+Step 5) 2 is even; divide by 2 and obtain 1.
 Step 6) 1 is odd; subtract 1 and obtain 0.
 */
 
@@ -127,7 +127,7 @@ Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
     let sum = 0;
     for(let i = 0; i < nums.length; i++) {
          for(let j = i + 1; j < nums.length; j++) {
-             if(nums[i] + nums[j] == target) {
+             if(nums[i] + nums[j] === target) {
                  return [i, j]
              }
          }
@@ -139,3 +139,50 @@ console.log(twoSum([2,7,11,15], 9)) // [0,1]
 console.log(twoSum([3,2,4], 6)) // [1,2]
 console.log(twoSum([3,3], 6)) // [0,1]
 
+
+/**
+ *
+ * 2 вложенных цикла - On^2
+ * Линейная сложность On - вне зависимости
+ * 200n или 1n - сложность равна On
+ *
+ * Пространственная сложность - количество используемой памяти
+ *
+ * Дана строка в кодировке UTF-8
+ *
+ * Найти самый часто встречающийся в ней символ.
+ * Если несколько символов встречаются одинаково часто, то можно вынести любой.
+ */
+
+
+/**
+ * Решение №1
+ *
+ * Переберем все позиции и для каждой позиции в строке еще раз переберем все позиции
+ * и в случае совпадение прибавим к счетчику единицу. Найдем максимальное значение счетчика.
+ *
+ * On^2
+ */
+
+const range = n => Array(n).fill().map((i, k) =>  k);
+
+const frequentSymbols = (symbols) => {
+    let symbolsAnswer = ''
+    let countAnswer = 0;
+    for( i in range(symbols.length)) {
+        let count = 0;
+        for ( j in range(symbols.length)) {
+            if(symbols[i] === symbols[j]) {
+                count+=1
+            }
+        }
+        if(count > countAnswer ) {
+            symbolsAnswer = symbols[i];
+            countAnswer = count;
+        }
+    }
+    return symbolsAnswer;
+}
+
+
+console.log(frequentSymbols('aaffffffffbabba'));
