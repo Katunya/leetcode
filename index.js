@@ -231,6 +231,8 @@ console.log(frequentSymbolsTwo('aabbhabba'));
  *
  * Создаем словарь, где ключ - символ, а значение сколько раз символ встретился
  * Где O(n+k)
+ *
+ * Set - O1
  */
 
 const frequentSymbolsThree = (symbols) => {
