@@ -166,7 +166,7 @@ console.log(twoSum([3,3], 6)) // [0,1]
 
 const range = n => Array(n).fill().map((i, k) =>  k);
 
-const frequentSymbols = (symbols) => {
+const frequentSymbolsOne = (symbols) => {
     let symbolsAnswer = ''
     let countAnswer = 0;
     for( i in range(symbols.length)) {
@@ -185,4 +185,77 @@ const frequentSymbols = (symbols) => {
 }
 
 
-console.log(frequentSymbols('aaffffffffbabba'));
+console.log(frequentSymbolsOne('fddffd'));
+
+
+/**
+ * Решение №2
+ *
+ * Переберем все позиции и для каждой позиции в строке еще раз переберем все позиции
+ * и в случае совпадение прибавим к счетчику единицу. Найдем максимальное значение счетчика.
+ *
+ * C помощью структуры данных - set() - представляет собой коллекцию, где значение может появляться лишь один раз
+ * Где n - колво символов в строке, а k - колво различных букв. Итого: O(n*k)
+ */
+
+
+const frequentSymbolsTwo = (symbols) => {
+    let symbolsAnswer = ''
+    let countAnswer = 0;
+
+    const set = new Set(symbols);
+
+    for(let now in set) {
+        let count = 0;
+        for ( j in range(symbols.length)) {
+            if(now === symbols[j]) {
+                count+=1
+            }
+        }
+        if(count > countAnswer ) {
+            symbolsAnswer = now;
+            countAnswer = count;
+        }
+    }
+    console.log(symbolsAnswer);
+}
+
+console.log(frequentSymbolsTwo('aabbhabba'));
+
+
+/**
+ * Решение №3
+ *
+ * Переберем все позиции и для каждой позиции в строке еще раз переберем все позиции
+ * и в случае совпадение прибавим к счетчику единицу. Найдем максимальное значение счетчика.
+ *
+ * Создаем словарь, где ключ - символ, а значение сколько раз символ встретился
+ * Где O(n+k)
+ */
+
+const frequentSymbolsThree = (symbols) => {
+    let symbolsAnswer = ''
+    let countAnswer = 0;
+
+    const dictionary = {}
+    const set = new Set(symbols);
+
+    for( let now in set) {
+        console.log(dictionary[now])
+        if( !(now in dictionary)) {
+            dictionary[now]+=0
+        }
+        dictionary[now]+=1
+
+        if(dictionary[now] > countAnswer) {
+            symbolsAnswer = now;
+            countAnswer = dictionary[now]
+        }
+    }
+    return symbolsAnswer;
+}
+
+console.log(frequentSymbolsThree('aaffffffffbabba'));
+
+
+
