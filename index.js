@@ -140,7 +140,7 @@ console.log(twoSum([3,2,4], 6)) // [1,2]
 console.log(twoSum([3,3], 6)) // [0,1]
 
 
-/**
+/*
  *
  * 2 вложенных цикла - On^2
  * Линейная сложность On - вне зависимости
@@ -155,7 +155,7 @@ console.log(twoSum([3,3], 6)) // [0,1]
  */
 
 
-/**
+/*
  * Решение №1
  *
  * Переберем все позиции и для каждой позиции в строке еще раз переберем все позиции
@@ -164,7 +164,7 @@ console.log(twoSum([3,3], 6)) // [0,1]
  * On^2
  */
 
-const range = n => Array(n).fill().map((i, k) =>  k);
+const range = (n) => Array(n).fill().map((i, k) =>  k);
 
 const frequentSymbolsOne = (symbols) => {
     let symbolsAnswer = ''
@@ -188,7 +188,7 @@ const frequentSymbolsOne = (symbols) => {
 console.log(frequentSymbolsOne('fddffd'));
 
 
-/**
+/*
  * Решение №2
  *
  * Переберем все позиции и для каждой позиции в строке еще раз переберем все позиции
@@ -217,13 +217,13 @@ const frequentSymbolsTwo = (symbols) => {
             countAnswer = count;
         }
     }
-    console.log(symbolsAnswer);
+    return symbolsAnswer;
 }
 
 console.log(frequentSymbolsTwo('aabbhabba'));
 
 
-/**
+/*
  * Решение №3
  *
  * Переберем все позиции и для каждой позиции в строке еще раз переберем все позиции
@@ -259,5 +259,221 @@ const frequentSymbolsThree = (symbols) => {
 
 console.log(frequentSymbolsThree('aaffffffffbabba'));
 
+/*
+    Яндекс.Академия
+    Лекция 2
 
+    Задача 1. Найти первое(левое) вхождение положительного числа x в неё или вывести -1, если число x не встречалось.
+ */
+
+const occurrenceNumber = (arr, x) => {
+    let positionAnswer = -1;
+    for( let i in range(arr.length)) {
+        if(positionAnswer === -1 && arr[i] === x) {
+            positionAnswer = i;
+        }
+    }
+    return positionAnswer
+}
+
+console.log(occurrenceNumber(2, [1,2,3,2]))
+
+/*
+    Яндекс.Академия
+    Лекция 2
+
+    Задача 3. Максимальное число в последовательности
+ */
+
+const maxValue = (arr) => {
+    let ans = arr[0];
+    for (let i in range(arr.length - 1)) {
+        if(arr[i] > ans) {
+            ans = arr[i]
+        }
+    }
+    return ans;
+}
+
+console.log(maxValue([1,2,3,2]));
+
+/*
+    Яндекс.Академия
+    Лекция 2
+
+    Задача 3. Максимальное число в последовательности (решение 2, без копирования)
+ */
+
+const maxValueWithoutCopy = (arr) => {
+    let ansIndex = 0;
+    for (let i in range(arr.length - 1)) {
+        if(arr[i] > arr[ansIndex]) {
+            ansIndex = i
+        }
+    }
+    return arr[ansIndex];
+}
+
+console.log(maxValueWithoutCopy([1,2,3,2]));
+
+
+/*
+    Яндекс.Академия
+    Лекция 2
+    Задача 4. Найти максимальное число в последовательности и второе по величине число(такое, которое будет максимальным, если вычеркнуть из последовательности одно максимальное число)
+ */
+
+const maxValueTwo = (arr) => {
+    let maxValue1 = Math.max(arr[0], arr[1]);
+    let maxValue2 = Math.min(arr[0], arr[1]);
+    for( let i in range(arr.splice(0,2).length)) {
+        if(arr[i] > maxValue1) {
+            maxValue2 = maxValue1;
+            maxValue1 = arr[i]
+        }
+        else if(arr[i] > maxValue2) {
+            maxValue2 = arr[i]
+        }
+    }
+    return `Числа: ${maxValue2} ${maxValue1} `
+}
+
+console.log(maxValueTwo([4,2,5,7,9,1]));
+console.log(maxValueTwo( [5,9,7,8,1,7,4,1,7] ));
+
+
+/*
+    Яндекс.Академия
+    Лекция 2
+    Задача 5. Найти минимальное четное число в последовательности или вынести -1, если такого не существует.
+ */
+
+const minEvenValue = (arr) => {
+    let ans = -1;
+    let flag = false
+    for( let i in range(arr.length)) {
+        if(arr[i] % 2 === 0 && ( !flag || ans > arr[i] )) {
+            ans =  arr[i]
+            flag = true;
+        }
+    }
+    return ans;
+}
+
+console.log(minEvenValue([4,5,7,9,1,2]));
+
+/*
+    Яндекс.Академия
+    Лекция 2
+    Задача 6. Дана последовательность слов. Вывести все самые короткие слова, через пробел.
+ */
+
+const shortWord = (words) => {
+    let minLength = words[0].length;
+    for(let word of words) {
+        if(minLength > word.length) {
+            minLength = word.length
+        }
+    }
+
+    let ansWords = ' ';
+    for (let word of words) {
+        if( word.length === minLength) {
+            ansWords = ansWords.concat(' ', word);
+        }
+    }
+    return ansWords
+}
+
+console.log(shortWord(['aaaa', 'bbb', 'cc', 'dd', 'ccccc', 'aaa', 'ej', 'aaewa','ww']));
+
+/*
+    Яндекс.Академия
+    Лекция 2
+    Задача 7. Игра PitCraft происходит в двумерном мире, который состоит из блоков размером 1х1. Над островом прошел сильный дождь, определите сколько блоков было затоплено.
+ */
+
+/* const waterCraft = (h) => {
+    let maxPosition = 0;
+    for( let i in range(h.length)) {
+        if(h[i] > maxPosition) {
+            maxPosition = i
+        }
+    }
+    let maxNow = 0;
+    let ans = 0;
+
+    for( let i in range(maxPosition)){
+        if( h[i] > maxNow){
+            maxNow = h[i]
+        }
+        ans += maxNow - h[i]
+    }
+    // обнуляем, так как дошли до максимального правого значения
+    maxNow = 0;
+    for( let i in range(h.splice(0, maxPosition).length)){
+        if( h[i] > maxNow){
+            maxNow = h[i]
+        }
+        ans += maxNow - h[i]
+    }
+    return ans;
+
+}
+
+console.log(waterCraft(3,1,4,3,5,1,1,3,1))
+
+*/
+
+
+/*
+    Яндекс.Академия
+    Лекция 2
+    Задача 8 * Упрощенная. Дана строка вида AAAAABBBBBBCCCCCDDDDDXXXXXZZZZ -> ABCDXZ
+ */
+
+const RLEeasy = (newString) => {
+    let symbol = '';
+    let ans = '';
+    for( let i in range(newString.length)){
+        if(symbol !== newString[i])  {
+            ans += newString[i]
+        }
+        symbol = newString[i]
+    }
+    return ans;
+}
+
+console.log(RLEeasy('AAAAABBBBBBCCCCCDDDDDXXXXXZZZZ'))
+
+/*
+    Яндекс.Академия
+    Лекция 2
+    Задача 8. RLE. Дана строка вида AAAAABBBBBBCCCCCDDDDDXXXXXZZZZ -> 5A6B5C5D5X4Z
+ */
+
+const counter = (symbol, n ) => {
+    if (n > 1) {
+        return n + symbol
+    }
+    return symbol
+}
+
+const RLE = (str) => {
+    let lastSymbol = str[0];
+    let lastPosition = 0;
+    let ans = [];
+
+    for( let i in range(str.length)){
+        if(lastSymbol !== str[i]) {
+            ans.push(counter(lastSymbol, i - lastPosition))
+            lastPosition = i;
+            lastSymbol= str[i]
+        }
+    }
+
+    return ans.join('')
+}
+
+console.log(RLE('AAAAABBBBBBCCCCCDDDDDXXXXXZZZZ'))
 
