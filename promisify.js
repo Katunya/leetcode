@@ -27,5 +27,3 @@ promisify(foo)
     .then(resolve => console.log(resolve))
     .then(() => promisify(baz))
     .then(resolve => console.log(resolve))
-
-
