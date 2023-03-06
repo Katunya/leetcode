@@ -46,3 +46,49 @@ memoized()
             return memoized().then(data4 => console.log(data4)); // получаем долго, считается заново
         }, 5000);
     });
+
+
+
+function generateKey(args) {
+    return args.map(arg => `${typeof(arg)}<${String(arg)}>`).join(',');
+}
+
+function memoize2(fn, timeout) {
+    const cache = {};
+
+    return function (...args) {
+        const key = generateKey(args);
+        const result = cache[key];
+
+        if (typeof result === 'undefined' || Date.now() > result.expire) {
+            console.log('Execute fn');
+            return Promise.resolve(fn(...args)).then(value => {
+                cache[key] = { value, expire: Date.now() + timeout };
+                console.log(cache)
+                return value;
+            });
+        }
+
+        console.log('From cache');
+
+        console.log(cache)
+        return Promise.resolve(result.value);
+    };
+}
+
+function getData() {
+    return new Promise(resolve => setTimeout(() => resolve(42), 1000));
+}
+
+const memoizedGetData = memoize2(getData, 1000);
+
+memoizedGetData()
+    .then(result => console.log(result)) // получаем долго
+    .then(() => memoizedGetData())
+    .then(result => console.log(result)) // получаем быстро, из кеша
+    .then(() => memoizedGetData())
+    .then(result => console.log(result)) // получаем быстро, из кеша
+    .then(() => {
+        // получаем долго, считается заново
+        setTimeout(() => memoizedGetData().then(result => console.log(result)), 5000);
+    });
