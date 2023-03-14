@@ -15,4 +15,4 @@ const maxValueWithoutCopy = (arr) => {
     return arr[ansIndex];
 }
 
-console.log(maxValueWithoutCopy([1,2,3,2]));
+console.log(maxValueWithoutCopy([1,2,3,2, 88]));

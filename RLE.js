@@ -16,7 +16,7 @@ const RLE = (str) => {
     let lastPosition = 0;
     let ans = [];
 
-    for( let i in range(str.length)){
+    for( let i = 0; i< str.length; i++){
         if(lastSymbol !== str[i]) {
             ans.push(counter(lastSymbol, i - lastPosition))
             lastPosition = i;

@@ -11,7 +11,6 @@ const twoTermsWithSumX = (nums, x) => {
 
     for (let current of nums) {
         previous.add(current)
-
         if (previous.has(x - current) && !(x - current === current)) {
             return `${current}, ${x - current}`
         }

@@ -1,4 +1,6 @@
 /*
+
+  Стандартный подход поиска мин и макс брать первый элемент и сравнивать
  *
  * 2 вложенных цикла - On^2
  * Линейная сложность On - вне зависимости
@@ -25,14 +27,14 @@ const range = (n) => Array(n).fill().map((i, k) =>  k);
 const frequentSymbolsOne = (symbols) => {
     let symbolsAnswer = ''
     let countAnswer = 0;
-    for( i in range(symbols.length)) {
+        for(let i = 0; i <= symbols.length; i++){
         let count = 0;
-        for ( j in range(symbols.length)) {
+        for(let j = 0; j <= symbols.length; j++){
             if(symbols[i] === symbols[j]) {
                 count+=1
             }
         }
-        if(count > countAnswer ) {
+        if(count > countAnswer) {
             symbolsAnswer = symbols[i];
             countAnswer = count;
         }
@@ -41,7 +43,8 @@ const frequentSymbolsOne = (symbols) => {
 }
 
 
-console.log(frequentSymbolsOne('fddffd'));
+// console.log(frequentSymbolsOne('agjfddffd'));
+// console.log(frequentSymbolsOne('faaaaaaddffd'));
 
 
 /*
@@ -55,25 +58,29 @@ console.log(frequentSymbolsOne('fddffd'));
  */
 
 
-const frequentSymbolsTwo = (symbols) => {
-    let symbolsAnswer = ''
-    let countAnswer = 0;
+// Решение от O(n+k)
 
+const frequentSymbolsTwo = (symbols) => {
     const set = new Set(symbols);
 
-    for(let now in set) {
+    let symbolAnswer = '';
+    let maxNumber = 0;
+
+    for( let now of set) {
         let count = 0;
-        for ( j in range(symbols.length)) {
-            if(now === symbols[j]) {
-                count+=1
+        for(let i = 0; i < symbols.length; i++) {
+            if(now === symbols[i]) {
+                count+=1;
             }
         }
-        if(count > countAnswer ) {
-            symbolsAnswer = now;
-            countAnswer = count;
+
+        if( count > maxNumber) {
+            symbolAnswer = now;
+            maxNumber = count;
         }
     }
-    return symbolsAnswer;
+
+    return symbolAnswer
 }
 
 console.log(frequentSymbolsTwo('aabbhabba'));
@@ -98,8 +105,7 @@ const frequentSymbolsThree = (symbols) => {
     const dictionary = {}
     const set = new Set(symbols);
 
-    for( let now in set) {
-        console.log(dictionary[now])
+    for( let now of set) {
         if( !(now in dictionary)) {
             dictionary[now]+=0
         }
@@ -110,6 +116,7 @@ const frequentSymbolsThree = (symbols) => {
             countAnswer = dictionary[now]
         }
     }
+
     return symbolsAnswer;
 }
 

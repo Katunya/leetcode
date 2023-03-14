@@ -4,6 +4,7 @@
 
     Задача 3. Максимальное число в последовательности
  */
+const range = (n) => Array(n).fill().map((i, k) =>  k);
 
 const maxValue = (arr) => {
     let ans = arr[0];
