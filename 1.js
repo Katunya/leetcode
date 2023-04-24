@@ -30,3 +30,5 @@ const meanFor = (numbers) => {
 };
 
 console.log(meanFor([1, 2, 3]));
+
+
