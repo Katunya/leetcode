@@ -21,17 +21,17 @@ const merge = (arr1, arr2) => {
 
 console.log(merge([21, 23, 24, 40, 75], [10, 11, 41, 50, 65, 86]));
 
-const mergeSort = (arr) => {
+const mergeIntoOne = (arr) => {
     const pivot = arr.length / 2;
 
     if(arr.length < 2) return arr;
 
     const left = arr.splice(0, pivot);
 
-    return merge(mergeSort(left), mergeSort(arr));
+    return merge(mergeIntoOne(left), mergeIntoOne(arr));
 
 }
-console.log(mergeSort([10, 11, 21, 24, 23, 40, 41, 50, 65, 75, 86]));
+console.log(mergeIntoOne([10, 11, 21, 24, 23, 40, 41, 50, 65, 75, 86]));
 
 
 const multiplicationTable = (arr, mult ) => {
