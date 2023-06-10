@@ -29,27 +29,40 @@ const twoSum = (nums, target) => {
     }
 };
 
-console.log(twoSum([2,7,11,15], 9)) // [0,1]
-console.log(twoSum([3,2,4], 6)) // [1,2]
-console.log(twoSum([3,3], 6)) // [0,1]
+// console.log(twoSum([2,7,11,15], 9)) // [0,1]
+// console.log(twoSum([3,2,4], 6)) // [1,2]
+// console.log(twoSum([3,3], 6)) // [0,1]
 
 const twoSum2 = function(nums, target) {
-    let left = 0;
-    let right = nums.length - 1;
-
-    while( left < right ) {
-        if(nums[left] + nums[right] === target) {
-            return [left, right];
-        }
-
-        if(nums[left] + nums[right] > target) {
-            right --;
-        }
-        else left ++;
+    let hash = {};
+    for( let i = 0; i < nums.length; i++) {
+        if(hash[target - nums[i]] || hash[target - nums[i]] === 0){
+                return [hash[target - nums[i]], i]
+            }
+        hash[nums[i]] = i;
     }
+    return hash
 };
 
 console.log(twoSum2([2, 7, 11, 15], 9)) // [0,1]
-console.log(twoSum2([2, 3, 4], 6)) // [0,2]
+console.log(twoSum2([3, 2, 4], 6)) // [1,2]
 console.log(twoSum2([3, 3], 6)) // [0,1]
 console.log(twoSum2([2, 3, 6, 9, 11, 13, 15, 17, 19] , 23)) // [2,7]
+
+
+
+const twoSum3 = function(nums, target) {
+    let map = new Map();
+
+    for( let i = 0; i < nums.length; i++) {
+        if(map.has(target - nums[i])){
+            return [map.get(target - nums[i]), i]
+        }
+        map.set(nums[i], i)
+    }
+};
+
+console.log(twoSum3([2, 7, 11, 15], 9)) // [0,1]
+console.log(twoSum3([3, 2, 4], 6)) // [1,2]
+console.log(twoSum3([3, 3], 6)) // [0,1]
+console.log(twoSum3([2, 3, 6, 9, 11, 13, 15, 17, 19] , 23)) // [2,7]

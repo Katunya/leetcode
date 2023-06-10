@@ -2,28 +2,39 @@
 // [0, 0, 1, 1, 0, 1, 1, 0]
 
 const maxOnesLength = (arr) => {
-    let max_ones_length = 0;
-    let subranges = [];
-    let last_el = arr[0];
+    let maxLength = 0;
+    let length = 0;
+    let lastZeroIndex = 0;
+    let missedZero = false;
 
-    for (let el of arr ) {
-        if (last_el !== el) {
-            if( el === 0) {
-                last_el = subranges[1]
-                max_ones_length = Math.max(last_el, max_ones_length)
+    for( let i = 0; i < arr.length ; i++) {
+        if (arr[i] === 0) {
+            if (missedZero) {
+                if (maxLength < length) maxLength = length;
+                length = 0;
+                i = lastZeroIndex
+                missedZero = false;
+            } else {
+                lastZeroIndex = i;
+                missedZero = true;
             }
-            subranges.push(el);
-        }
-    else {
-        subranges[-1] = el;
-        last_el = el
-        }
+        } else length = length + 1;
     }
 
-    console.log(subranges, last_el, max_ones_length)
+    if( length > maxLength) maxLength = length
+    if(arr.length === length) return length - 1;
 
+    return maxLength
 }
+//
+console.log(maxOnesLength([0, 0, 1, 1, 0, 1, 1, 0])); // 4
+console.log(maxOnesLength([0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1]));// 5
+console.log(maxOnesLength([0]));// 0
+console.log(maxOnesLength([1, 1, 1]));// 2
+console.log(maxOnesLength([0, 0, 0]));// 0
+console.log(maxOnesLength([1, 0, 1, 1]));// 3
+console.log(maxOnesLength([0, 1, 1, 0]));// 2
+console.log(maxOnesLength([1, 0, 1, 1, 0]));// 3
+console.log(maxOnesLength([1, 0, 0, 1, 0]));// 1
 
-console.log(maxOnesLength([0, 0, 1, 1, 0, 1, 1, 0]));
-console.log(maxOnesLength([0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1]));
 
