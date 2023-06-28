@@ -40,7 +40,7 @@
 
 const counter = (symbol, count) => {
     if (count > 1) {
-        return symbol + count.toString();
+        return count.toString() + symbol ;
     }
     return symbol;
 }
@@ -57,7 +57,7 @@ const RLE = (str) => {
 
     for(let i = 0; i < str.length; i++) {
         if(prevSymbol !== str[i]) {
-            result.push(counter(prevSymbol, i - prevPosition));
+            result.push(counter(prevSymbol,  i - prevPosition));
             prevSymbol = str[i];
             prevPosition = i;
         }

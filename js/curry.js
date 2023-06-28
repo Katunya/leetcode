@@ -20,7 +20,7 @@ const curry = (fn) => {
 
 const curriedJoin = curry(join)
 
-console.log(curriedJoin(1, 2, 3)) // '1_2_3'
+console.log(curriedJoin(1, 2, 3, 898)) // '1_2_3'
 
 console.log(curriedJoin(1)(2) (3)) // '1_2_3'
 

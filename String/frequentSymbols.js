@@ -83,7 +83,7 @@ const frequentSymbolsTwo = (symbols) => {
     return symbolAnswer
 }
 
-console.log(frequentSymbolsTwo('aabbhabba'));
+console.log(2 + frequentSymbolsTwo('aabbhabba'));
 
 
 /*
@@ -120,4 +120,4 @@ const frequentSymbolsThree = (symbols) => {
     return symbolsAnswer;
 }
 
-console.log(frequentSymbolsThree('aaffffffffbabba'));
+console.log(3+ frequentSymbolsThree('aaffffffffbabba'));

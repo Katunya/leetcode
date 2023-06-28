@@ -20,9 +20,9 @@ const singleNumber = function(nums) {
         res = res ^ i;
     }
     return res
-};
-console.log(singleNumber([2,2,1]));
-console.log(singleNumber([4,1,2,1,2]));
+};l
+// console.log(singleNumber([2,2,1]));
+console.log(singleNumber([4,1,2,1,2,2]));
 console.log(singleNumber([1]));
 
 //хэш
@@ -39,6 +39,6 @@ const singleNumberHash = function(nums) {
     return hash;
 }
 
-console.log(singleNumberHash([2,2,1]));
+console.log(singleNumberHash([2,2,1, 0, 0]));
 console.log(singleNumberHash([4,1,2,1,2]));
 console.log(singleNumberHash([1]));

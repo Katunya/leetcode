@@ -2,7 +2,6 @@
 
 const replacePalindrome = (str) => {
     const lowerStr = str.toLowerCase().split(' ').join('');
-    const set = new Set(lowerStr);
 
     const dictionary = {};
 

@@ -16,7 +16,7 @@ const task = (array) => {
             if (sortedArray[i] + 1 !== sortedArray[i + 1]) {
                 if(sortedArray[i] === firstSymbol) { result.push(sortedArray[i]);}
                 else {
-                    result.push(`${firstSymbol}_${sortedArray[i]}`);
+                    result.push(`${firstSymbol}-${sortedArray[i]}`);
                     firstSymbol = sortedArray[i + 1];
                 }
 
